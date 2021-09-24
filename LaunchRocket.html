@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Open Space</title>
+        <style>
+            .space{background-color:black; width: 100vw; height: 100vh;position: absolute;}
+            .planet-area{background-color:red; height:80%; width: 50%;
+                left:10 ; bottom: 0; position: fixed;}
+            .planet{background-color:blue; height:60%; width:30%;
+                left:10; bottom:0;position: fixed;}
+            .rocket{background-color: silver; height:15%; width:15%;
+                left: 150px; bottom:200px; position: fixed;}
+            .control-panel__inner{background-color:black; height:90%; width:90%;
+                display:flex; flex-direction:column; justify-content:space-around;align-items:center;}
+
+            .password{height:10%; width: 70%; border:1px solid yellow; background: darkgrey;}
+
+            .flex-item{display:flex;}
+            .check-buttons{height:15%; width:90%; border: 1px solid black; border-radius:10px;
+                display:flex;flex-direction:row; justify-content:space-around;align-items:center;}
+
+            .levers{height: 40%; width:90%; border:1px solid black; border-radius: 10px;
+                display:flex;flex-direction:row; justify-content:space-around;align-items:center;}
+
+            .lever{height:70%; width: 5%; }
+
+            .control-panel{display:flex; justify-content: center; align-items:center;height:35%; width:45%;right:50px; top:50px; position:fixed;
+                background-color:#269;
+                background-image: linear-gradient(white 2px, transparent 2px),
+                linear-gradient(90deg, white 2px, transparent 2px),
+                linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
+                background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
+                background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px; }
+            .button{background-color:blue;}
+        </style>
+    </head>
+    <body>
+    <div class="space">
+        <div class="planet-area">
+            <img class="planet">
+            <img class="rocket">
+        </div>
+        <div class="control-panel">
+            <div class="control-panel__inner">
+                <input id="password" type="password" name="Enter password to unlock"></input>
+                <input onclick="check()" id="ok" type="button" value="ok" style="background:yellow; border: 1px solid white; width:30px; height: 25px;"></input>
+
+                <div class="check-buttons">
+                    <input onchange="checkedBoxes()" disabled class="button" type="checkbox"></input>
+                    <input onchange="checkedBoxes()" disabled class="button" type="checkbox"></input>
+                    <input onchange="checkedBoxes()" disabled class="button" type="checkbox"></input>
+                    <input onchange="checkedBoxes()" disabled class="button" type="checkbox"></input>
+                    <input onchange="checkedBoxes()" disabled class="button" type="checkbox"></input>
+                    <input onchange="checkedBoxes()" disabled class="button" type="checkbox"></input>
+                </div>
+                <div class="levers">
+                    <input onchange="checkedBoxes()" disabled class="lever" type="range" orient="vertical" min="0" max="10" ></input>
+                    <input onchange="checkedBoxes()" disabled class="lever" type="range" orient="vertical" min="0" max="10"></input>
+                    <input onchange="checkedBoxes()" disabled class="lever" type="range" orient="vertical" min="0" max="10"></input>
+                    <input onchange="checkedBoxes()" disabled class="lever" type="range" orient="vertical" min="0" max="10"></input>
+                    <input onchange="checkedBoxes()" disabled class="lever" type="range" orient="vertical" min="0" max="10"></input>
+                </div>
+                <input disabled id='launch' type="button" value="launch" style="height:50px; width:80px; border-radius:50%; background:red;border: 1px solid white;"></input>
+            </div>
+        </div>
+    </div>
+        <script>
+            let password=document.getElementById("password");
+            let ok=document.getElementById("ok");
+            let button=document.querySelectorAll(".button");
+            let lever=document.querySelectorAll(".lever");
+            let launch=document.getElementById("launch");
+            let input=password.value;
+
+            function check() {
+                if (document.getElementById("password").value =="TrustNo1") {
+                    button[0].removeAttribute("disabled");
+                    button[1].removeAttribute("disabled");
+                    button[2].removeAttribute("disabled");
+                    button[3].removeAttribute("disabled");
+                    button[4].removeAttribute("disabled");
+                    button[5].removeAttribute("disabled");
+                    lever[0].removeAttribute("disabled");
+                    lever[1].removeAttribute("disabled");
+                    lever[2].removeAttribute("disabled");
+                    lever[3].removeAttribute("disabled");
+                    lever[4].removeAttribute("disabled");}}
+
+            function checkedBoxes() {
+                if(button[0].checked==true && button[1].checked==true
+                    && button[2].checked==true && button[3].checked==true && button[4].checked==true
+                    && button[5].checked==true && lever[0].value==10 && lever[1].value==10 && lever[2].value==10 &&
+                lever[3].value==10 &&lever[4].value==10)
+                {launch.removeAttribute("disabled");}}
+        </script>
+    </body>
+</html>
