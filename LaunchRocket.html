@@ -4,14 +4,15 @@
         <meta charset="UTF-8">
         <title>Open Space</title>
         <style>
-            .space{background-color:black; width: 100vw; height: 100vh;position: absolute;}
-            .planet-area{background-color:red; height:80%; width: 50%;
+            .space{background:url("space.png"); width: 100vw; height: 100vh;position: absolute;}
+            .planet-area{background:url("space.png"); height:80%; width: 50%;
                 left:10 ; bottom: 0; position: fixed;}
-            .planet{background-color:blue; height:60%; width:30%;
-                left:10; bottom:0;position: fixed;}
-            .rocket{background-color: silver; height:15%; width:15%;
-                left: 150px; bottom:200px; position: fixed;}
-            .control-panel__inner{background-color:black; height:90%; width:90%;
+            .planet{background:url("mars.png"); background-repeat:no-repeat; height:70%; width:60%;
+                left:10; bottom:0;position: fixed;background-size:800px 900px;}
+            .rocket{background:url("rocket.png"); height:20%; width:10%;
+                left: 300px; bottom:270px; position: fixed;background-size:200px 170px; background-repeat:no-repeat; background-position:center;
+                transform:rotate(20deg)}
+            .control-panel__inner{background-color:black; height:300px; width:450px;
                 display:flex; flex-direction:column; justify-content:space-around;align-items:center;}
 
             .password{height:10%; width: 70%; border:1px solid yellow; background: darkgrey;}
@@ -25,14 +26,9 @@
 
             .lever{height:70%; width: 5%; }
 
-            .control-panel{display:flex; justify-content: center; align-items:center;height:35%; width:45%;right:50px; top:50px; position:fixed;
-                background-color:#269;
-                background-image: linear-gradient(white 2px, transparent 2px),
-                linear-gradient(90deg, white 2px, transparent 2px),
-                linear-gradient(rgba(255,255,255,.3) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,.3) 1px, transparent 1px);
-                background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px;
-                background-position:-2px -2px, -2px -2px, -1px -1px, -1px -1px; }
+            .control-panel{display:flex; justify-content: center; align-items:center;height:340px; width:490px;right:50px; top:50px; position:fixed;
+                background-color: #efec00; opacity: 1; background: repeating-linear-gradient( 45deg, #000000, #000000 15px, #efec00 6.5px, #efec00 32.5px );
+                 }
             .button{background-color:blue;}
         </style>
     </head>
@@ -62,7 +58,7 @@
                     <input onchange="checkedBoxes()" disabled class="lever" type="range" orient="vertical" min="0" max="10"></input>
                     <input onchange="checkedBoxes()" disabled class="lever" type="range" orient="vertical" min="0" max="10"></input>
                 </div>
-                <input disabled id='launch' type="button" value="launch" style="height:50px; width:80px; border-radius:50%; background:red;border: 1px solid white;"></input>
+                <input disabled  onclick="move()" id='launch' type="button" value="launch" style="font-size: 20px;height:60px; width:90px; border-radius:50%; background:red;border: 2px solid white;"></input>
             </div>
         </div>
     </div>
@@ -73,6 +69,7 @@
             let lever=document.querySelectorAll(".lever");
             let launch=document.getElementById("launch");
             let input=password.value;
+            let rocket=document.querySelector(".rocket");
 
             function check() {
                 if (document.getElementById("password").value =="TrustNo1") {
@@ -94,6 +91,13 @@
                     && button[5].checked==true && lever[0].value==10 && lever[1].value==10 && lever[2].value==10 &&
                 lever[3].value==10 &&lever[4].value==10)
                 {launch.removeAttribute("disabled");}}
+            
+            function move(){
+                rocket.animate([
+                {transform:"translate(0px,0px) rotate(30deg)"},
+                {transform: "translate(300px,-400px) rotate(30deg)"}],
+                {duration: 5000});}
+                
         </script>
     </body>
 </html>
